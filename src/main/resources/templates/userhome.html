@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>User Home</title>
+</head>
+<body>
+  <div align="center">
+  
+    <div sec:authorize="isAuthenticated()">
+       Welcome <b><span sec:authentication="name">Username</span></b>
+       &nbsp;&nbsp;
+       <i><span sec:authentication="principal.authorities">Roles</span></i>
+       
+       <div align="center">
+      <b><a th:href="@{/userproductpage}">View Products</a></b>
+       </div>
+         
+         <div sec:authorize = "hasAuthority('admin')">
+            <h3>You will see this only if you are ADMIN</h3>
+           <p>
+              <a th:href="@{/admin}">Admin Home</a>
+          </p>
+         </div>
+        <br> <br>
+     </div>
+       <form th:action="@{/logout}" method="post">
+       <input type="submit" value="Logout" />
+       </form>
+  </div>
+
+</body>
+</html>

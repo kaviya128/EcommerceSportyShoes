@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html  xmlns="http://w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Products</title>
+</head>
+<body>
+ <div align="right">
+       <a th:href="@{/home}">User Home</a>
+    
+      &nbsp;&nbsp;
+    <form th:action="@{/logout}" method="post">
+       <input type="submit" value="Logout" />
+       </form>
+
+</div>
+   <div align="center">
+      <h1>Product List</h1>
+       <form th:action="@{/userproductpage}">
+        Filter: <input type="text" name="category" id="category" size="50" th:value="${category}" required />
+        &nbsp;
+        <input type="submit" value="Search" />
+        &nbsp;
+        <input type="button" value="Clear" id="btnclear" onclick="clearSearch()" />
+   </form>
+   <script type="text/javascript">
+      function clearSearch() {
+    	  window.location="[[@{/userproductpage}]]";
+      }
+    </script>
+   <br/><br/>
+   <table border="1" cellpadding="10">
+      <thead>
+         <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Availability</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr th:each="products : ${listProducts}">
+               <td th:text="${products.productId}">Product ID</td>
+               <td th:text="${products.productName}">Product Name</td>
+               <td th:text="${products.category}">Category</td>
+               <td th:text="${products.price}">Price</td>
+               <td th:text="${products.size}">Size</td>
+               <td th:text="${products.availability}">Availability</td>
+               <td>
+                <a th:href="@{/view/{productId} (productId=${products.productId})}">View</a>
+                 </td>
+           </tr>
+        </tbody>    
+  </table>
+    </div>
+</body>
+</html>

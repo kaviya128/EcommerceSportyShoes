@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Individual Product</title>
+</head>
+<body>
+
+  <div align="right">
+       <a th:href="@{/home}">User Home</a>
+    
+      &nbsp;&nbsp;
+    <form th:action="@{/logout}" method="post">
+       <input type="submit" value="Logout" />
+       </form>
+
+   </div>
+   
+   <img th:src="@{/resources/static/img/shoepic.jpg}"/>
+
+  <form action="#" th:action="@{/shoppingcart}" th:object="${product}"
+         method="post" >
+
+   <div align="center">
+   
+    <label>Product Id</label>
+  <input type="text" id="productId" name="productId" th:field="*{productId}">
+  <br><br><br>
+  <label>Product Name</label>
+  <input type="text" id="productName" name="productName" th:field="*{productName}">
+  <br><br><br>
+  <label>Category</label>
+  <input type="text" id="category" name="category" th:field="*{category}">
+  <br><br><br>
+   <label>Price</label>
+  <input type="text" id="price" name="price" th:field="*{price}">
+   <br><br><br>
+   <label>Size</label>
+  <input type="text" id="size" name="size" th:field="*{size}">
+   <br><br><br>
+   <label>Availability</label>
+  <input type="text" id="availability" name="availability" th:field="*{availability}">
+   <br><br><br>
+   quantity : 1
+   
+   <input type="submit" value="Add To Cart">
+  </div>
+     </form>
+     
+     
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List Of Users</title>
+</head>
+<body>
+
+ <div align="right">
+       <a th:href="@{/admin}">Admin Home</a>
+          &nbsp;&nbsp;
+        <form th:action="@{/logout}" method="post">
+           <input type="submit" value="Logout" />
+         </form>
+       </div>
+       <br><br>
+ <div align ="center">
+ 
+ <h1> List Of Users </h1>
+ 
+ <form th:action="@{/userslist}">
+ 
+  Filter: <input type="text" name="username" id="username" size="50" th:value="${username}" required />
+   &nbsp;
+        <input type="submit" value="Search" />
+        &nbsp;
+        <input type="button" value="Clear" id="btnclear" onclick="clearSearch()" />
+   </form>
+   <script type="text/javascript">
+      function clearSearch() {
+    	  window.location="[[@{/userslist}]]";
+      }
+    </script>
+   <br/><br/>
+ 
+  <table border="1" cellpadding="10">
+      <thead>
+         <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+           <tr th:each="users : ${listUsers}">
+               <td th:text="${users.userId}"> User ID</td>
+               <td th:text="${users.username}"> User Name</td>
+               <td th:text="${users.email}"> Email</td>
+            </tr>
+         </tbody>
+        </table>
+ </div>
+
+</body>
+</html>

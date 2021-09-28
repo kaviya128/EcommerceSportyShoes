@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Manage Purchase Report</title>
+</head>
+<body>
+
+    <div align="right">
+       <a th:href="@{/admin}">Admin Home</a>
+          &nbsp;&nbsp;
+        <form th:action="@{/logout}" method="post">
+           <input type="submit" value="Logout" />
+         </form>
+       </div>
+       <br><br>
+
+  <div align="center">
+  
+    <h1>Purchase Report</h1>
+     <br/><br/>
+     <form th:action ="@{/purchasereportbydate}">
+      Filter: <input type="date" name="date" id="date" size="50" th:value="${date}" required />
+          &nbsp;    
+              <input type="submit" value="Search" />
+        &nbsp;
+              <input type="button" value="Clear" id="btnclear" onclick="clearSearch()" />
+     </form>
+   <script type="text/javascript">
+      function clearSearch() {
+    	  window.location="[[@{/purchasereportbydate}]]";
+      }
+      </script>
+      <br/><br/>
+      <table border="1" cellpadding="10">
+      <thead>
+         <tr>
+            <th>Purchase ID</th>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Date Purchased</th>
+        </tr>
+      </thead>
+      <tbody>
+           <tr th:each="purchase : ${purchaseReportList}">
+               <td th:text="${purchase.purchaseId}">Purchase ID</td>
+               <td th:text="${purchase.userId}">User ID</td>
+               <td th:text="${purchase.username}">Username</td>
+               <td th:text="${purchase.productId}">Product ID</td>
+               <td th:text="${purchase.productName}">Product Name</td>
+               <td th:text="${purchase.quantity}">Quantity</td>
+               <td th:text="${purchase.price}">Price</td>
+               <td th:text="${purchase.category}">Category</td>
+               <td th:text="${purchase.datePurchasedBy}">Date Purchased</td>
+              </tr>
+              
+       </tbody> 
+     
+    </table>
+  </div>
+
+</body>
+</html>
